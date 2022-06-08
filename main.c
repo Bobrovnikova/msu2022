@@ -43,7 +43,7 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);   
-    char* outputPath = "~/big_problem/msu2022/result.png";
+    char* outputPath = "result.png";
 
     stbi_write_png(outputPath, iw, ih, n, newImage, 0);
 
