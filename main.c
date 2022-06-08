@@ -27,7 +27,7 @@ unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int ste
 
 int main() {
 
-    char* inputPath = "hampster.png";
+    char* inputPath = "serov.png.jpg";
     int iw, ih, n; 
     unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
