@@ -45,7 +45,7 @@ int main() {
     newImage = color_to_gray(idata, iw, ih, n);   
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, n, newImage, 0);
+    stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
 
     free(newImage);
     free(odata);
