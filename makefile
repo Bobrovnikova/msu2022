@@ -2,6 +2,7 @@
 
 int main(){
 
-int b=5;
+printf("Hi!");
+
 return 0;
 }
