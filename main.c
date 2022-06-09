@@ -29,6 +29,7 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
             if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
+	    else Image[sizeV*i+j] = 127;
         }
     }
 }
@@ -53,7 +54,7 @@ int main() {
 
     newImage = color_to_gray(idata, iw, ih, n);
     int t_black = 100;
-    int t_white = 160;
+    int t_white = 180;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
    
     char* outputPath = "result.png";
