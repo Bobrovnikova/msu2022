@@ -28,7 +28,7 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
-            if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
+            else if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
 	    else Image[sizeV*i+j] = 127;
         }
     }
