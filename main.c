@@ -78,11 +78,12 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-    median_filter(newImage, iw, ih);
+   
     int t_black = 92;
     int t_white = 215;
     int t_gray = 145;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
+    median_filter(newImage, iw, ih);
    
     char* outputPath = "result.png";
 
