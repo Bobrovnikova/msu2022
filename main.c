@@ -55,8 +55,8 @@ int main() {
 
     newImage = color_to_gray(idata, iw, ih, n);
     int t_black = 64;
-    int t_white = 202;
-    int t_gray = 100;
+    int t_white = 207;
+    int t_gray = 95;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
    
     char* outputPath = "result.png";
