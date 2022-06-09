@@ -23,6 +23,15 @@ unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int ste
     return grayImage;
 
 }
+unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_black, int t_white) {
+    int i, j;
+    for (i = 2; i < sizeH-1; i++) {
+        for (j = 2; j < sizeV-1; j++) {
+            if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
+            if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
+        }
+    }
+}
 
 
 int main() {
@@ -42,7 +51,11 @@ int main() {
             return 1;
         }
 
-    newImage = color_to_gray(idata, iw, ih, n);   
+    newImage = color_to_gray(idata, iw, ih, n);
+    int t_black = 100;
+    int t_white = 160;
+    gray_to_bw(newImage, iw, ih, t_black, t_white);
+   
     char* outputPath = "result.png";
 
     stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
