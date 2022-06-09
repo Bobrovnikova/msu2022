@@ -8,6 +8,10 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+int forsort(const void* x, const void* y) {
+    return ( *(int*)x - *(int*)y );
+}
+
 unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int step) {
     int k = 0;
     unsigned char* grayImage = (unsigned char*)malloc(sizeV*sizeH*sizeof(unsigned char));
@@ -35,6 +39,26 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
     }
 }
 
+void  median_filter( unsigned char* Image, int sizeV, int sizeH) {
+    int i, j;
+    unsigned char* a = (unsigned char*)malloc(9*sizeof(unsigned char));
+    for (i = 2; i < sizeH-1; i++) {
+        for (j = 2; j < sizeV-1; j++) {
+                a[0] = Image[sizeV*(i-1)+j-1];
+                a[1] = Image[sizeV*i+j-1];
+                a[2] = Image[sizeV*(i+1)+j-1];
+                a[3] = Image[sizeV*(i-1)+j];
+                a[4] = Image[sizeV*i+j];
+                a[5] = Image[sizeV*(i+1)+j];
+                a[6] = Image[sizeV*(i-1)+j+1];
+                a[7] = Image[sizeV*i+j+1];
+                a[8] = Image[sizeV*(i+1)+j+1];
+                qsort(a, 9, sizeof(unsigned char), forsort);
+                Image[sizeV*i+j] = a[4];
+        }
+    }
+    return;
+}
 
 int main() {
 
@@ -54,6 +78,7 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
+    median_filter(newImage, iw, ih);
     int t_black = 64;
     int t_white = 191;
     int t_gray = 128;
