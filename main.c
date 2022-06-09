@@ -62,7 +62,7 @@ void  median_filter( unsigned char* Image, int sizeV, int sizeH) {
 
 int main() {
 
-    char* inputPath = "serov.png.jpg";
+    char* inputPath = "hampster.png";
     int iw, ih, n; 
     unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
