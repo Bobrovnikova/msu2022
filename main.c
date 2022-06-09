@@ -12,9 +12,9 @@ int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
 }
 
-unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int step) {
+float* color_to_gray(float* Image, int sizeV, int sizeH, int step) {
     int k = 0;
-    unsigned char* grayImage = (unsigned char*)malloc(sizeV*sizeH*sizeof(unsigned char));
+    float* grayImage = (float*)malloc(sizeV*sizeH*sizeof(float));
     if ( grayImage == NULL) {
             printf("Memory allocation error at color_to_gray(): %d, %d\n", sizeV, sizeH );
             return 1;
@@ -27,7 +27,7 @@ unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int ste
     return grayImage;
 
 }
-unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_black, int t_white, int t_gray) {
+float*  gray_to_bw( float* Image, int sizeV, int sizeH, int t_black, int t_white, int t_gray) {
     int i, j;
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
@@ -39,9 +39,9 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
     }
 }
 
-void  median_filter( unsigned char* Image, int sizeV, int sizeH) {
+void  median_filter( float* Image, int sizeV, int sizeH) {
     int i, j;
-    unsigned char* a = (unsigned char*)malloc(9*sizeof(unsigned char));
+    float* a = (float*)malloc(9*sizeof(float));
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
                 a[0] = Image[sizeV*(i-1)+j-1];
@@ -53,8 +53,22 @@ void  median_filter( unsigned char* Image, int sizeV, int sizeH) {
                 a[6] = Image[sizeV*(i-1)+j+1];
                 a[7] = Image[sizeV*i+j+1];
                 a[8] = Image[sizeV*(i+1)+j+1];
-                qsort(a, 9, sizeof(unsigned char), forsort);
+                qsort(a, 9, sizeof(float), forsort);
                 Image[sizeV*i+j] = a[4];
+        }
+    }
+    return;
+}
+
+void  gaus_filter( float* Image, int sizeV, int sizeH) {
+    int i, j;
+    for (i = 2; i < sizeH-2; i++) {
+        for (j = 2; j < sizeV-2; j++) {
+                Image[sizeV*i+j] += 0.000789*Image[sizeV*(i-2)+j-2] + 0.006581*Image[sizeV*(i-1)+j-2] + 0.013347*Image[sizeV*(i)+j-2] + 0.006581*Image[sizeV*(i+1)+j-2] + 0.000789*Image[sizeV*(i+2)+j-2];
+		Image[sizeV*i+j] += 0.006581*Image[sizeV*(i-2)+j-1] + 0.054901*Image[sizeV*(i-1)+j-1] + 0.111345*Image[sizeV*(i)+j-1] + 0.054901*Image[sizeV*(i+1)+j-1] + 0.006581*Image[sizeV*(i+2)+j-1];
+		Image[sizeV*i+j] += 0.013327*Image[sizeV*(i-2)+j] + 0.111345*Image[sizeV*(i-1)+j] + 0.225821*Image[sizeV*(i)+j] + 0.111345*Image[sizeV*(i+1)+j] + 0.013347*Image[sizeV*(i+2)+j];
+		Image[sizeV*i+j] += 0.006581*Image[sizeV*(i-2)+j+1] + 0.054901*Image[sizeV*(i-1)+j+1] + 0.111345*Image[sizeV*(i)+j+1] + 0.054901*Image[sizeV*(i+1)+j+1] + 0.006581*Image[sizeV*(i+2)+j+1];
+		Image[sizeV*i+j] += 0.000789*Image[sizeV*(i-2)+j+2] + 0.006581*Image[sizeV*(i-1)+j+2] + 0.013347*Image[sizeV*(i)+j+2] + 0.006581*Image[sizeV*(i+1)+j+2] + 0.000789*Image[sizeV*(i+2)+j+2];
         }
     }
     return;
@@ -64,26 +78,25 @@ int main() {
 
     char* inputPath = "hampster.png";
     int iw, ih, n; 
-    unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
+    float *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
         printf("ERROR: can't read file %s\n", inputPath );
         return 1;
     }
     
-    unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
-    unsigned char* newImage = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
+    float* odata = (float*)malloc(ih*iw*n*sizeof(float));
+    float* newImage = (float*)malloc(ih*iw*sizeof(float));
     if ( (odata == NULL) || (newImage == NULL) ) {
             printf("Memory allocation error at main()" );
             return 1;
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-   
+    gaus_filter(newImage, iw, ih);
     int t_black = 92;
     int t_white = 215;
     int t_gray = 145;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
-    median_filter(newImage, iw, ih);
    
     char* outputPath = "result.png";
 
