@@ -23,13 +23,14 @@ unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int ste
     return grayImage;
 
 }
-unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_black, int t_white) {
+unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_black, int t_white, int t_gray) {
     int i, j;
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
+	    else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
             else if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
-	    else Image[sizeV*i+j] = 127;
+	    else Image[sizeV*i+j] = 160;
         }
     }
 }
@@ -53,9 +54,10 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-    int t_black = 100;
-    int t_white = 180;
-    gray_to_bw(newImage, iw, ih, t_black, t_white);
+    int t_black = 64;
+    int t_white = 191;
+    int t_gray = 128;
+    gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
    
     char* outputPath = "result.png";
 
