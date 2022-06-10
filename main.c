@@ -78,7 +78,7 @@ void  gaus_filter( unsigned char* Image, int sizeV, int sizeH) {
 }
 unsigned char* gray_to_color(unsigned char* Image, int sizeV, int sizeH) {
     unsigned char* colorImage = (unsigned char*)malloc(sizeV*sizeH*3*sizeof(unsigned char));
-    if ( grayImage == NULL) {
+    if ( colorImage == NULL) {
             printf("Memory allocation error at color_to_gray(): %d, %d\n", sizeV, sizeH );
             return 1;
     }
