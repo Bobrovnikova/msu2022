@@ -66,12 +66,12 @@ void  gaus_filter( unsigned char* Image, int sizeV, int sizeH) {
     for (i = 2; i < sizeH-2; i++) {
         for (j = 2; j < sizeV-2; j++) {
 		a = 0;
-                a += 0.000789*(unsigned char)Image[sizeV*(i-2)+j-2] + 0.006581*(unsigned char)Image[sizeV*(i-1)+j-2] + 0.013347*(unsigned char)Image[sizeV*(i)+j-2] + 0.006581*(unsigned char)Image[sizeV*(i+1)+j-2] + 0.000789*(unsigned char)Image[sizeV*(i+2)+j-2];
-		a += 0.006581*(unsigned char)Image[sizeV*(i-2)+j-1] + 0.054901*(unsigned char)Image[sizeV*(i-1)+j-1] + 0.111345*(unsigned char)Image[sizeV*(i)+j-1] + 0.054901*(unsigned char)Image[sizeV*(i+1)+j-1] + 0.006581*(unsigned char)Image[sizeV*(i+2)+j-1];
-		a += 0.013327*(unsigned char)Image[sizeV*(i-2)+j] + 0.111345*(unsigned char)Image[sizeV*(i-1)+j] + 0.225821*(unsigned char)Image[sizeV*(i)+j] + 0.111345*(unsigned char)Image[sizeV*(i+1)+j] + 0.013347*(unsigned char)Image[sizeV*(i+2)+j];
-		a += 0.006581*(unsigned char)Image[sizeV*(i-2)+j+1] + 0.054901*(unsigned char)Image[sizeV*(i-1)+j+1] + 0.111345*(unsigned char)Image[sizeV*(i)+j+1] + 0.054901*(unsigned char)Image[sizeV*(i+1)+j+1] + 0.006581*(unsigned char)Image[sizeV*(i+2)+j+1];
-		a += 0.000789*(unsigned char)Image[sizeV*(i-2)+j+2] + 0.006581*(unsigned char)Image[sizeV*(i-1)+j+2] + 0.013347*(unsigned char)Image[sizeV*(i)+j+2] + 0.006581*(unsigned char)Image[sizeV*(i+1)+j+2] + 0.000789*(unsigned char)Image[sizeV*(i+2)+j+2];
-		Image[sizeV*i+j] = (unsigned char)a;
+                a += 0.000789*Image[sizeV*(i-2)+j-2] + 0.006581*Image[sizeV*(i-1)+j-2] + 0.013347*Image[sizeV*(i)+j-2] + 0.006581*Image[sizeV*(i+1)+j-2] + 0.000789*Image[sizeV*(i+2)+j-2];
+		a += 0.006581*Image[sizeV*(i-2)+j-1] + 0.054901*Image[sizeV*(i-1)+j-1] + 0.111345*Image[sizeV*(i)+j-1] + 0.054901*Image[sizeV*(i+1)+j-1] + 0.006581*Image[sizeV*(i+2)+j-1];
+		a += 0.013327*Image[sizeV*(i-2)+j] + 0.111345*Image[sizeV*(i-1)+j] + 0.225821*Image[sizeV*(i)+j] + 0.111345*Image[sizeV*(i+1)+j] + 0.013347*Image[sizeV*(i+2)+j];
+		a += 0.006581*Image[sizeV*(i-2)+j+1] + 0.054901*Image[sizeV*(i-1)+j+1] + 0.111345*Image[sizeV*(i)+j+1] + 0.054901*Image[sizeV*(i+1)+j+1] + 0.006581*Image[sizeV*(i+2)+j+1];
+		a += 0.000789*Image[sizeV*(i-2)+j+2] + 0.006581*Image[sizeV*(i-1)+j+2] + 0.013347*Image[sizeV*(i)+j+2] + 0.006581*Image[sizeV*(i+1)+j+2] + 0.000789*Image[sizeV*(i+2)+j+2];
+		Image[sizeV*i+j] = a;
         }
     }
     return;
@@ -95,12 +95,12 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-    gaus_filter(newImage, iw, ih);
+    
     int t_black = 92;
     int t_white = 215;
     int t_gray = 145;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
-   
+    gaus_filter(newImage, iw, ih);
     char* outputPath = "result.png";
 
     stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
