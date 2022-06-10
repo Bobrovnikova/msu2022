@@ -76,6 +76,21 @@ void  gaus_filter( unsigned char* Image, int sizeV, int sizeH) {
     }
     return;
 }
+unsigned char* gray_to_color(unsigned char* Image, int sizeV, int sizeH) {
+    unsigned char* colorImage = (unsigned char*)malloc(sizeV*sizeH*3*sizeof(unsigned char));
+    if ( grayImage == NULL) {
+            printf("Memory allocation error at color_to_gray(): %d, %d\n", sizeV, sizeH );
+            return 1;
+    }
+
+    for (int i = 0; i < sizeV*sizeH*3; i = i + 3) {
+        colorImage[i] = 0.3*Image[i]+30;
+	colorImage[i+1] = 0.3*Image[i];
+	colorImage[i+2] = 0.3*Image[i]+100;
+    }
+    return colorImage;
+
+}
 
 int main() {
 
@@ -102,9 +117,10 @@ int main() {
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     //gaus_filter(newImage, iw, ih);
     gaus_filter(newImage, iw, ih);
+    idata = gray_to_color(newImage, iw, ih);
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
+    stbi_write_png(outputPath, iw, ih, 3, idata, 0);
 
     free(newImage);
     free(odata);
