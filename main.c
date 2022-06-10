@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 20
+#define E 10
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -24,6 +24,21 @@ void dfs(int x, int color, int sizeV, int sizeH, int* mark, unsigned char * Imag
     }
     if(abs(Image[x]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
         dfs(sizeV*(i+1)+j+1, color, sizeV, sizeH, mark, Image);
+    }
+    if(abs(Image[x]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
+        dfs(sizeV*(i-1)+j, color, sizeV, sizeH, mark, Image);
+    }
+    if(abs(Image[x]-Image[sizeV*i+j-1])<E&&!mark[sizeV*i+j-1]){
+        dfs(sizeV*i+j-1, color, sizeV, sizeH, mark, Image);
+    }
+    if(abs(Image[x]-Image[sizeV*(i-1)+j-1])<E&&!mark[sizeV*(i-1)+j-1]){
+        dfs(sizeV*(i-1)+j-1, color, sizeV, sizeH, mark, Image);
+    }
+    if(abs(Image[x]-Image[sizeV*(i-1)+j+1])<E&&!mark[sizeV*(i-1)+j+1]){
+        dfs(sizeV*(i-1)+j+1, color, sizeV, sizeH, mark, Image);
+    }
+    if(abs(Image[x]-Image[sizeV*(i+1)+j-1])<E&&!mark[sizeV*(i+1)+j-1]){
+        dfs(sizeV*(i+1)+j-1, color, sizeV, sizeH, mark, Image);
     }
     return;
 }
