@@ -83,11 +83,11 @@ unsigned char* gray_to_color(unsigned char* Image, int sizeV, int sizeH) {
             return 1;
     }
 
-    for (int i = 0; i < sizeV*sizeH*4; i = i + 4) {
-        colorImage[i] = 0.3*Image[i]+30;
-	colorImage[i+1] = 0.3*Image[i];
-	colorImage[i+2] = 0.3*Image[i]+100;
-	colorImage[i+3] = 255;
+    for (int i = 0; i < sizeV*sizeH; i = i + 1) {
+        colorImage[4*i] = 0.3*Image[i]+30;
+	colorImage[4*i+1] = 0.3*Image[i];
+	colorImage[4*i+2] = 0.3*Image[i]+100;
+	colorImage[4*i+3] = 255;
     }
     return colorImage;
 
