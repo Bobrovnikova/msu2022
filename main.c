@@ -128,7 +128,7 @@ int main() {
 
     char* inputPath = "hampster.png";
     int iw, ih, n; 
-    int i, k;
+    int i, j, k;
     unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
         printf("ERROR: can't read file %s\n", inputPath );
@@ -157,9 +157,10 @@ int main() {
         col[i] = 0;
     }
     k = 55;
-    for (i = 0; i < iw*ih; i++) {
-        if (col[i] == 0) {
-            dfs(i, k, iw, ih, col, newImage);
+    for (i = 1; i < ih-1; i++) {
+        for (j = 1; j < iw-1; j++) {
+        if (col[iw*i+j] == 0) {
+            dfs(iw*i+j, k, iw, ih, col, newImage);
             k = k + 50;
         }
     }
