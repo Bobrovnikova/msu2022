@@ -162,7 +162,8 @@ int main() {
         if (col[iw*i+j] == 0) {
             dfs(iw*i+j, k, iw, ih, col, newImage);
             k = k + 50;
-        }
+	}
+	}
     }
     for (i = 0; i < iw*ih; i++) {
         odata[i*n] = 78+col[i]+0.5*col[i-1];
