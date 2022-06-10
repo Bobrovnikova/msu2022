@@ -7,9 +7,25 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
+#define E 2
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
+}
+
+void dfs(int x, int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
+    int i = x/sizeV, j = x%sizeV;
+    mark[x] = color;
+    if(abs(Image[x]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
+        dfs(sizeV*(i+1)+j, color, sizeV, sizeH, mark, graf);
+    }
+    if(abs(Image[x]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
+        dfs(sizeV*i+j+1, color, sizeV, sizeH, mark, graf);
+    }
+    if(abs(Image[x]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
+        dfs(sizeV*(i+1)+j+1, color, sizeV, sizeH, mark, graf);
+    }
+    return;
 }
 
 unsigned char* color_to_gray(unsigned char* Image, int sizeV, int sizeH, int step) {
@@ -118,14 +134,31 @@ int main() {
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     //gaus_filter(newImage, iw, ih);
     gaus_filter(newImage, iw, ih);
-    unsigned char* colorImage = (unsigned char*)malloc(iw*ih*4*sizeof(unsigned char));
-    colorImage = gray_to_color(newImage, iw, ih);
+    //unsigned char* colorImage = (unsigned char*)malloc(iw*ih*n*sizeof(unsigned char));
+    //colorImage = gray_to_color(newImage, iw, ih);
+    int col[iw*ih];
+    for (i = 0; i < iw*ih; i++) {
+        col[i] = 0;
+    }
+    k = 55;
+    for (i = 0; i < iw*ih; i++) {
+        if (col[i] == 0) {
+            dfs(i, k, iw, ih, col, newImage);
+            k = k + 50;
+        }
+    }
+    for (i = 0; i < iw*ih; i++) {
+        odata[i*n] = 78+col[i]+0.5*col[i-1];
+        odata[i*n+1] = 46+col[i];
+        odata[i*n+2] = 153+col[i];
+        if (n == 4) odata[i*n+3] = 255;
+    }
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 4, colorImage, 0);
+    stbi_write_png(outputPath, iw, ih, n, odata, 0);
 
     free(newImage);
-    free(colorImage);
+    //free(colorImage);
     free(odata);
     stbi_image_free(idata);
 
