@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 2
+#define E 20
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
