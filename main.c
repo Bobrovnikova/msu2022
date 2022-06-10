@@ -17,13 +17,13 @@ void dfs(int x, int color, int sizeV, int sizeH, int* mark, unsigned char * Imag
     int i = x/sizeV, j = x%sizeV;
     mark[x] = color;
     if(abs(Image[x]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
-        dfs(sizeV*(i+1)+j, color, sizeV, sizeH, mark, graf);
+        dfs(sizeV*(i+1)+j, color, sizeV, sizeH, mark, Image);
     }
     if(abs(Image[x]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
-        dfs(sizeV*i+j+1, color, sizeV, sizeH, mark, graf);
+        dfs(sizeV*i+j+1, color, sizeV, sizeH, mark, Image);
     }
     if(abs(Image[x]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
-        dfs(sizeV*(i+1)+j+1, color, sizeV, sizeH, mark, graf);
+        dfs(sizeV*(i+1)+j+1, color, sizeV, sizeH, mark, Image);
     }
     return;
 }
@@ -113,6 +113,7 @@ int main() {
 
     char* inputPath = "hampster.png";
     int iw, ih, n; 
+    int i, k;
     unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
         printf("ERROR: can't read file %s\n", inputPath );
