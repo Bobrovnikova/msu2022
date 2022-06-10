@@ -118,7 +118,7 @@ int main() {
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     //gaus_filter(newImage, iw, ih);
     gaus_filter(newImage, iw, ih);
-    unsigned char* colorImage = (unsigned char*)malloc(sizeV*sizeH*4*sizeof(unsigned char));
+    unsigned char* colorImage = (unsigned char*)malloc(iw*ih*4*sizeof(unsigned char));
     colorImage = gray_to_color(newImage, iw, ih);
     char* outputPath = "result.png";
 
