@@ -97,10 +97,11 @@ int main() {
     newImage = color_to_gray(idata, iw, ih, n);
     
     int t_black = 92;
-    int t_white = 218;
+    int t_white = 220;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     gaus_filter(newImage, iw, ih);
+    median_filter(newImage, iw, ih);
     char* outputPath = "result.png";
 
     stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
