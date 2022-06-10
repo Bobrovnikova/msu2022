@@ -13,7 +13,7 @@ int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
 }
 
-void dfs(int i, int j int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
+void dfs(int i, int j, int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
     mark[i*sizeV+j] = color;
     if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(i+1, j, color, sizeV, sizeH, mark, Image);
