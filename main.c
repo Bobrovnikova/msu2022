@@ -13,31 +13,30 @@ int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
 }
 
-void dfs(int x, int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
-    int i = x/sizeV, j = x%sizeV;
-    mark[x] = color;
-    if(abs(Image[x]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
+void dfs(int i, int j int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
+    mark[i*sizeV+j] = color;
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(sizeV*(i+1)+j, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
         dfs(sizeV*i+j+1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
         dfs(sizeV*(i+1)+j+1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
         dfs(sizeV*(i-1)+j, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*i+j-1])<E&&!mark[sizeV*i+j-1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*i+j-1])<E&&!mark[sizeV*i+j-1]){
         dfs(sizeV*i+j-1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*(i-1)+j-1])<E&&!mark[sizeV*(i-1)+j-1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j-1])<E&&!mark[sizeV*(i-1)+j-1]){
         dfs(sizeV*(i-1)+j-1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*(i-1)+j+1])<E&&!mark[sizeV*(i-1)+j+1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j+1])<E&&!mark[sizeV*(i-1)+j+1]){
         dfs(sizeV*(i-1)+j+1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[x]-Image[sizeV*(i+1)+j-1])<E&&!mark[sizeV*(i+1)+j-1]){
+    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j-1])<E&&!mark[sizeV*(i+1)+j-1]){
         dfs(sizeV*(i+1)+j-1, color, sizeV, sizeH, mark, Image);
     }
     return;
@@ -157,10 +156,10 @@ int main() {
         col[i] = 0;
     }
     k = 55;
-    for (i = 1; i < ih-1; i++) {
-        for (j = 1; j < iw-1; j++) {
+    for (i = 2; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
-            dfs(iw*i+j, k, iw, ih, col, newImage);
+            dfs(i, j, k, iw, ih, col, newImage);
             k = k + 50;
 	}
 	}
