@@ -118,12 +118,14 @@ int main() {
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     //gaus_filter(newImage, iw, ih);
     gaus_filter(newImage, iw, ih);
-    idata = gray_to_color(newImage, iw, ih);
+    unsigned char* colorImage = (unsigned char*)malloc(sizeV*sizeH*4*sizeof(unsigned char));
+    colorImage = gray_to_color(newImage, iw, ih);
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 4, idata, 0);
+    stbi_write_png(outputPath, iw, ih, 4, colorImage, 0);
 
     free(newImage);
+    free(colorImage);
     free(odata);
     stbi_image_free(idata);
 
