@@ -98,7 +98,7 @@ int main() {
     
     int t_black = 92;
     int t_white = 215;
-    int t_gray = 145;
+    int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     gaus_filter(newImage, iw, ih);
     char* outputPath = "result.png";
