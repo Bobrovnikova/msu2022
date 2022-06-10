@@ -15,16 +15,16 @@ int forsort(const void* x, const void* y) {
 
 void dfs(int i, int j, int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
     mark[i*sizeV+j] = color;
-    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
+    if(i+1<sizeH-1&&abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(i+1, j, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[i*sizeV+j]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
+    if(j+1<sizeV-1&&abs(Image[i*sizeV+j]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
         dfs(i,j+1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
+    if(i+1<sizeH-1&&j+1<sizeV-1&&abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
         dfs(i+1,j+1, color, sizeV, sizeH, mark, Image);
     }
-    if(abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
+   /* if(abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
         dfs(i-1,j, color, sizeV, sizeH, mark, Image);
     }
     if(abs(Image[i*sizeV+j]-Image[sizeV*i+j-1])<E&&!mark[sizeV*i+j-1]){
@@ -38,7 +38,7 @@ void dfs(int i, int j, int color, int sizeV, int sizeH, int* mark, unsigned char
     }
     if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j-1])<E&&!mark[sizeV*(i+1)+j-1]){
         dfs(i+1,j-1, color, sizeV, sizeH, mark, Image);
-    }
+    }*/
     return;
 }
 
