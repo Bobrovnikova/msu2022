@@ -164,14 +164,14 @@ int main() {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
             dfs(i, j, k, iw, ih, col, newImage);
-            k = k + 30;
+            k = k + 40;
 	}
 	}
     }
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 58+col[i]+0.5*col[i-1];//+0.5*col[i-1]
-        odata[i*n+1] = 26+col[i];
-        odata[i*n+2] = 133+col[i];
+        odata[i*n] = 68+col[i]+0.5*col[i-1];//+0.5*col[i-1]
+        odata[i*n+1] = 36+col[i];
+        odata[i*n+2] = 143+col[i];
         if (n == 4) odata[i*n+3] = 255;
     }
     char* outputPath = "result.png";
