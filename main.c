@@ -66,7 +66,7 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
 	    //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
-            else if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
+            if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
 	    //else Image[sizeV*i+j] = 160;
         }
     }
@@ -148,7 +148,7 @@ int main() {
     newImage = color_to_gray(idata, iw, ih, n);
     //gaus_filter(newImage, iw, ih);
     int t_black = 100;
-    int t_white = 180;
+    int t_white = 150;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
     //gaus_filter(newImage, iw, ih);
@@ -164,7 +164,7 @@ int main() {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
             dfs(i, j, k, iw, ih, col, newImage);
-            k = k + 50;
+            k = k + 10;
 	}
 	}
     }
