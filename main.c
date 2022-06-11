@@ -142,7 +142,7 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-    gaus_filter(newImage, iw, ih);
+    //gaus_filter(newImage, iw, ih);
     int t_black = 97;
     int t_white = 220;
     int t_gray = 150;
