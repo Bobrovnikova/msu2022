@@ -64,7 +64,7 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
 	    //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
             else if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
-	    else Image[sizeV*i+j] = 160;
+	    //else Image[sizeV*i+j] = 160;
         }
     }
 }
