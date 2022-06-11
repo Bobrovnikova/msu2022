@@ -165,6 +165,7 @@ int main() {
 	}
     }
     for (i = 0; i < iw*ih; i++) {
+	newImage[i] = col[i];
         odata[i*n] = 78+col[i];//+0.5*col[i-1]
         odata[i*n+1] = 46+col[i];
         odata[i*n+2] = 153+col[i];
@@ -172,7 +173,7 @@ int main() {
     }
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, n, odata, 0);
+    stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
 
     free(newImage);
     //free(colorImage);
