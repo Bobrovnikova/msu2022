@@ -13,7 +13,7 @@ int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
 }
 
-void dfs(int i, int j, int color, int sizeV, int sizeH, int* mark, unsigned char * Image){
+void dfs(int i, int j, int color, int sizeV, int sizeH, unsigned char * mark, unsigned char * Image){
     mark[i*sizeV+j] = color;
     if(i+1<sizeH-1&&abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(i+1, j, color, sizeV, sizeH, mark, Image);
@@ -151,7 +151,7 @@ int main() {
     //gaus_filter(newImage, iw, ih);
     //unsigned char* colorImage = (unsigned char*)malloc(iw*ih*n*sizeof(unsigned char));
     //colorImage = gray_to_color(newImage, iw, ih);
-    int col[iw*ih];
+    unsigned char* col = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < iw*ih; i++) {
         col[i] = 0;
     }
@@ -165,7 +165,6 @@ int main() {
 	}
     }
     for (i = 0; i < iw*ih; i++) {
-	newImage[i] = col[i];
         odata[i*n] = 78+col[i];//+0.5*col[i-1]
         odata[i*n+1] = 46+col[i];
         odata[i*n+2] = 153+col[i];
@@ -173,7 +172,7 @@ int main() {
     }
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
+    stbi_write_png(outputPath, iw, ih, 1, col, 0);
 
     free(newImage);
     //free(colorImage);
