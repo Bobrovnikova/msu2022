@@ -151,7 +151,7 @@ int main() {
     int t_white = 180;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
-    //gaus_filter(newImage, iw, ih);
+    gaus_filter(newImage, iw, ih);
     //gaus_filter(newImage, iw, ih);
     //unsigned char* colorImage = (unsigned char*)malloc(iw*ih*n*sizeof(unsigned char));
     //colorImage = gray_to_color(newImage, iw, ih);
@@ -169,14 +169,14 @@ int main() {
 	}
     }
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 78+col[i];//+0.5*col[i-1]
+        odata[i*n] = 78+col[i]+0.5*col[i-1];//+0.5*col[i-1]
         odata[i*n+1] = 46+col[i];
         odata[i*n+2] = 153+col[i];
         if (n == 4) odata[i*n+3] = 255;
     }
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 1, col, 0);
+    stbi_write_png(outputPath, iw, ih, n, odata, 0);
 
     free(newImage);
     //free(colorImage);
