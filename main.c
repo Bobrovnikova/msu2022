@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 60
+#define E 20
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -148,7 +148,7 @@ int main() {
     newImage = color_to_gray(idata, iw, ih, n);
     gaus_filter(newImage, iw, ih);
     int t_black = 100;
-    int t_white = 150;
+    int t_white = 180;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
     //gaus_filter(newImage, iw, ih);
