@@ -142,13 +142,13 @@ int main() {
         }
 
     newImage = color_to_gray(idata, iw, ih, n);
-    gaus_filter(newImage, iw, ih);
+    //gaus_filter(newImage, iw, ih);
     int t_black = 97;
     int t_white = 220;
     int t_gray = 150;
-    gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
+    //gray_to_bw(newImage, iw, ih, t_black, t_white, t_gray);
     //gaus_filter(newImage, iw, ih);
-    gaus_filter(newImage, iw, ih);
+    //gaus_filter(newImage, iw, ih);
     //unsigned char* colorImage = (unsigned char*)malloc(iw*ih*n*sizeof(unsigned char));
     //colorImage = gray_to_color(newImage, iw, ih);
     int col[iw*ih];
