@@ -15,15 +15,15 @@ int forsort(const void* x, const void* y) {
 
 void dfs(int i, int j, int color, int sizeV, int sizeH, unsigned char * mark, unsigned char * Image){
     mark[i*sizeV+j] = color;
-    if((i+2)<(sizeH-1)&&(j+1)<(sizeV-1))
+    if((i+2)<(sizeH-1)&&(j+1)<(sizeV-1)&&(i+2)>2&&(j+1)>2)
     if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(i+2, j+1, color, sizeV, sizeH, mark, Image);
     }
-    if((j+1)<(sizeV-1)&&(i-2)>2)
+    if((j+1)<(sizeV-1)&&(i-2)>2&&(j+1)>2&&(i-2)<(sizeH-1))
     if(abs(Image[i*sizeV+j]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
         dfs(i-2,j+1, color, sizeV, sizeH, mark, Image);
     }
-    if((j-2)>2)
+    if((j-2)>2&&(j-2)<(sizeV-1))
     if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j+1])<E&&!mark[sizeV*(i+1)+j+1]){
         dfs(i,j-2, color, sizeV, sizeH, mark, Image);
     }
