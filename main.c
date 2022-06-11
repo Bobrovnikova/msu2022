@@ -127,7 +127,8 @@ int main() {
 
     char* inputPath = "hampster.png";
     int iw, ih, n; 
-    int i, j, k;
+    int i, j;
+    unsigned char k;
     unsigned char *idata = stbi_load(inputPath, &iw, &ih, &n, 0);
     if (idata == NULL) {
         printf("ERROR: can't read file %s\n", inputPath );
