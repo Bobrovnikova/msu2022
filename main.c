@@ -172,7 +172,7 @@ int main() {
     }
     char* outputPath = "result.png";
 
-    stbi_write_png(outputPath, iw, ih, 1, newImage, 0);
+    stbi_write_png(outputPath, iw, ih, 1, col, 0);
 
     free(newImage);
     //free(colorImage);
