@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 30
+#define E 20
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -147,8 +147,8 @@ int main() {
 
     newImage = color_to_gray(idata, iw, ih, n);
     gaus_filter(newImage, iw, ih);
-    int t_black = 100;
-    int t_white = 180;
+    int t_black = 80;
+    int t_white = 200;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
     gaus_filter(newImage, iw, ih);
@@ -159,19 +159,19 @@ int main() {
     for (i = 0; i < iw*ih; i++) {
         col[i] = 0;
     }
-    k = 55;
+    k = 7;
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
             dfs(i, j, k, iw, ih, col, newImage);
-            k = k + 50;
+            k = k + 3;
 	}
 	}
     }
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 78+col[i]+0.5*col[i-1];//+0.5*col[i-1]
-        odata[i*n+1] = 46+col[i];
-        odata[i*n+2] = 153+col[i];
+        odata[i*n] = 78+col[i]+0.2*col[i-1];//+0.5*col[i-1]
+        odata[i*n+1] = col[i];
+        odata[i*n+2] = 173+col[i]-0.5*col[i-1];
         if (n == 4) odata[i*n+3] = 255;
     }
     char* outputPath = "result.png";
