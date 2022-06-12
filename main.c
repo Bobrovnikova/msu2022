@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 20
+#define E 30
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -159,7 +159,7 @@ int main() {
     for (i = 0; i < iw*ih; i++) {
         col[i] = 0;
     }
-    k = 15;
+    k = 55;
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
@@ -169,9 +169,9 @@ int main() {
 	}
     }
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 68+col[i]+0.5*col[i-1];//+0.5*col[i-1]
-        odata[i*n+1] = 36+col[i];
-        odata[i*n+2] = 143+col[i];
+        odata[i*n] = 78+col[i]+0.5*col[i-1];//+0.5*col[i-1]
+        odata[i*n+1] = 46+col[i];
+        odata[i*n+2] = 153+col[i];
         if (n == 4) odata[i*n+3] = 255;
     }
     char* outputPath = "result.png";
