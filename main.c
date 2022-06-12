@@ -168,7 +168,11 @@ int main() {
 	}
 	}
     }
-    for (i = 0; i < iw*ih; i++) {
+    odata[0] = 78+col[0];
+    odata[1] = col[1];
+    odata[2] = 173+col[i];
+    odata[3] = 255;
+    for (i = 1; i < iw*ih; i++) {
         odata[i*n] = 78+col[i]+0.2*col[i-1];//+0.5*col[i-1]
         odata[i*n+1] = col[i];
         odata[i*n+2] = 173+col[i]-0.5*col[i-1];
