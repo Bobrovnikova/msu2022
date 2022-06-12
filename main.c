@@ -159,12 +159,12 @@ int main() {
     for (i = 0; i < iw*ih; i++) {
         col[i] = 0;
     }
-    k = 1;
+    k = 15;
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
             dfs(i, j, k, iw, ih, col, newImage);
-            k = k + 40;
+            k = k + 50;
 	}
 	}
     }
