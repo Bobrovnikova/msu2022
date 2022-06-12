@@ -27,7 +27,7 @@ void dfs(int i, int j, int color, int sizeV, int sizeH, unsigned char * mark, un
     if(abs(Image[i*sizeV+j]-Image[sizeV*i+j-2])<E&&!mark[sizeV*i+j-2]){
         dfs(i,j-2, color, sizeV, sizeH, mark, Image);
     }
-    if((i+1)<(sizeH-1)&&(i+1)>2))
+    if((i+1)<(sizeH-1)&&(i+1)>2)
     if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
         dfs(i+1, j, color, sizeV, sizeH, mark, Image);
     }
