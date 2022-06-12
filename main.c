@@ -170,7 +170,7 @@ int main() {
     }
     
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 78+col[i]+0.2*col[i-1];//+0.5*col[i-1]
+        odata[i*n] = 78+col[i]+0.2*col[i];//+0.5*col[i-1]
         odata[i*n+1] = col[i];
         odata[i*n+2] = 173+col[i];
         if (n == 4) odata[i*n+3] = 255;
