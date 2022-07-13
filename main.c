@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 20
+#define E 25
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -26,14 +26,6 @@ void dfs(int i, int j, int color, int sizeV, int sizeH, unsigned char * mark, un
     if((j-2)>2&&(j-2)<(sizeV-1))
     if(abs(Image[i*sizeV+j]-Image[sizeV*i+j-2])<E&&!mark[sizeV*i+j-2]){
         dfs(i,j-2, color, sizeV, sizeH, mark, Image);
-    }
-    if((i+1)<(sizeH-1)&&(i+1)>2)
-    if(abs(Image[i*sizeV+j]-Image[sizeV*(i+1)+j])<E&&!mark[sizeV*(i+1)+j]){
-        dfs(i+1, j, color, sizeV, sizeH, mark, Image);
-    }
-    if((j+1)<(sizeV-1)&&((j+1)>2))
-    if(abs(Image[i*sizeV+j]-Image[sizeV*i+j+1])<E&&!mark[sizeV*i+j+1]){
-        dfs(i,j+1, color, sizeV, sizeH, mark, Image);
     }
     /*if(i-1>2&&abs(Image[i*sizeV+j]-Image[sizeV*(i-1)+j])<E&&!mark[sizeV*(i-1)+j]){
         dfs(i-1,j, color, sizeV, sizeH, mark, Image);
@@ -73,9 +65,9 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
-	    //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
+     //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
             if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
-	    //else Image[sizeV*i+j] = 160;
+     //else Image[sizeV*i+j] = 160;
         }
     }
 }
@@ -156,7 +148,7 @@ int main() {
     newImage = color_to_gray(idata, iw, ih, n);
     gaus_filter(newImage, iw, ih);
     int t_black = 100;
-    int t_white = 200;
+    int t_white = 180;
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
     gaus_filter(newImage, iw, ih);
@@ -167,20 +159,19 @@ int main() {
     for (i = 0; i < iw*ih; i++) {
         col[i] = 0;
     }
-    k =55;
+    k = 55;
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
         if (col[iw*i+j] == 0) {
             dfs(i, j, k, iw, ih, col, newImage);
-            k = k + 50;
+            k = k + 10;
 	}
 	}
     }
-    
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 78+col[i]+0.2*col[i];//+0.5*col[i-1]
-        odata[i*n+1] = col[i];
-        odata[i*n+2] = 173+col[i];
+        odata[i*n] = 78+col[i]+0.5*col[i-1];//+0.5*col[i-1]
+        odata[i*n+1] = 46+col[i];
+        odata[i*n+2] = 153+col[i];
         if (n == 4) odata[i*n+3] = 255;
     }
     char* outputPath = "result.png";
