@@ -152,6 +152,7 @@ int main() {
     int t_gray = 150;
     gray_to_bw(newImage, iw, ih, t_black, t_white);
     gaus_filter(newImage, iw, ih);
+    median_filter( newImage, iw, ih);
     //gaus_filter(newImage, iw, ih);
     //unsigned char* colorImage = (unsigned char*)malloc(iw*ih*n*sizeof(unsigned char));
     //colorImage = gray_to_color(newImage, iw, ih);
