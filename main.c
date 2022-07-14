@@ -7,7 +7,7 @@
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#define E 25
+#define E 20
 
 int forsort(const void* x, const void* y) {
     return ( *(int*)x - *(int*)y );
@@ -65,9 +65,9 @@ unsigned char*  gray_to_bw( unsigned char* Image, int sizeV, int sizeH, int t_bl
     for (i = 2; i < sizeH-1; i++) {
         for (j = 2; j < sizeV-1; j++) {
             if (Image[sizeV*i+j] < t_black) Image[sizeV*i+j] = 0;
-     //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
+	    //else if (Image[sizeV*i+j] < t_gray) Image[sizeV*i+j] = 90;
             if (Image[sizeV*i+j] > t_white) Image[sizeV*i+j] = 255;
-     //else Image[sizeV*i+j] = 160;
+	    //else Image[sizeV*i+j] = 160;
         }
     }
 }
